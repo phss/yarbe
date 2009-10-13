@@ -9,9 +9,13 @@ describe "YARBE App" do
     Sinatra::Application
   end
 
-  it "says hello" do
+  it "should responds to a silly request" do
     get "/"
     last_response.should be_ok
     last_response.body.should == "Blah"
+  end
+  
+  it "should do more stuff" do
+    pending
   end
 end
