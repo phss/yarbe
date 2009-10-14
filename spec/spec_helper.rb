@@ -6,6 +6,11 @@ require "spec"
 require "rack/test"
 require "yarbe"
 
+set :environment, :test
+
+DataMapper::setup(:default, "sqlite3::memory:")
+DataMapper.auto_migrate!
+
 Spec::Runner.configure do |conf|
   conf.include Rack::Test::Methods
 end

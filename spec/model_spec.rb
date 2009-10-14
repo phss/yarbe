@@ -1,10 +1,5 @@
 require "spec_helper"
  
-set :environment, :test
- 
-DataMapper::setup(:default, "sqlite3::memory:")
-DataMapper.auto_migrate!
- 
 describe "Model" do
   
   before(:each) do
