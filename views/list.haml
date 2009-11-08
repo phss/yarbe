@@ -1,4 +1,4 @@
 - @posts.each do |post|
-  %div
-    #title= post.title
-    #body= post.body
+  .post{:id => "post#{post.id}"}
+    .title= post.title
+    .body= post.body
