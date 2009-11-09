@@ -1,21 +1,24 @@
 app_file = File.join(File.dirname(__FILE__), *%w[.. .. app yarbe.rb])
 require app_file
-require "webrat"
+require 'spec/expectations'
 require 'rack/test'
-
-Sinatra::Application.app_file = app_file
-
-World do
-  def app
-		Sinatra::Application
-	end
-	include Rack::Test::Methods
-	include Webrat::Methods
-	include Webrat::Matchers
-end
+require "webrat"
+require "webrat/sinatra"
 
 Webrat.configure do |config|
-	config.mode = :rack
-	config.application_framework = :sinatra
-	config.application_port = 4567
+  config.mode = :rack
 end
+
+class MyWorld
+  include Rack::Test::Methods
+  include Webrat::Methods
+  include Webrat::Matchers
+
+  Webrat::Methods.delegate_to_session :response_code, :response_body
+
+  def app
+    Sinatra::Application
+  end
+end
+
+World{MyWorld.new}

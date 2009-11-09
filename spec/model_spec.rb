@@ -22,5 +22,19 @@ describe "Model" do
     post.body.should == "This is the body of the post. Yay!"
     post.created_at.should_not be_nil # FIXME: better date check
   end
+  
+  describe "(trimming body)" do
+    it "should trim body to 1000 characters" do
+      post = Post.new(:body => "0123456789" * 200)
+
+      post.trimmed_body.should == ("0123456789") * 100 + "..."
+    end
+
+    it "should trim body to body size and content if it's less than 1000 characters" do
+      post = Post.new(:body => "Small body")
+
+      post.trimmed_body.should == "Small body"
+    end
+  end
 
 end
