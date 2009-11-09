@@ -16,7 +16,6 @@ configure do
 end
 
 get '/' do
-  # Post.all.inject("") { |response, post| response += "#{post.title} - #{post.body}\n" }
   @posts = Post.all
   haml :list
 end

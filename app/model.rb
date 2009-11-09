@@ -1,4 +1,4 @@
-require "datamapper"
+require "dm-core"
 
 class Post
   include DataMapper::Resource
