@@ -9,7 +9,7 @@ class Post
   property :body, Text
   property :created_at, DateTime
   
-  def trimmed_body
+  def blurb
     return "#{body[0..999]}..." if body.size > 1000 
     body
   end

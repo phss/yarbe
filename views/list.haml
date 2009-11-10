@@ -1,5 +1,5 @@
 - @posts.each_with_index do |post, index|
   .post{:id => "post#{index}"}
     .title= post.title
-    .date= format_date(post.created_at)
-    .body= post.trimmed_body
+    .published_date= format_date(post.created_at)
+    .blurb= post.blurb

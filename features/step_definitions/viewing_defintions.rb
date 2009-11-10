@@ -25,8 +25,8 @@ Then /^I see a blog list in the following order$/ do |table|
   table.hashes.each_with_index do |entry, i|
     last_response.should have_xpath("//div", :id => "post#{i}") do |node|
       node.should have_xpath("//div", :class => "title", :content => entry[:title])
-      node.should have_xpath("//div", :class => "body",  :content => entry[:body])
-      node.should have_xpath("//div", :class => "date",  :content => entry[:published_date])
+      node.should have_xpath("//div", :class => "blurb",  :content => entry[:body])
+      node.should have_xpath("//div", :class => "published_date",  :content => entry[:published_date])
     end
   end
 end
@@ -34,7 +34,7 @@ end
 Then /^I see the post with large content trimmed down to 1000 chars$/ do
   last_response.should have_xpath("//div", :id => "post0") do |node|
     node.should have_xpath("//div", :class => "title", :content => "Large post")
-    node.should have_xpath("//div", :class => "body",  :content => ("0123456789"*100) + "...")
+    node.should have_xpath("//div", :class => "blurb",  :content => ("0123456789"*100) + "...")
   end
 end
 				
