@@ -24,6 +24,10 @@ get '/' do
   haml :list
 end
 
+get '/new_post' do
+  haml :new_post
+end
+
 get '/yarbe.css' do
    content_type 'text/css', :charset => 'utf-8'
    sass :yarbe
