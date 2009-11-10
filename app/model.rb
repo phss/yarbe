@@ -10,7 +10,6 @@ class Post
   property :created_at, DateTime
   
   def blurb
-    return "#{body[0..999]}..." if body.size > 1000 
-    body
+    body.size > 1000 ? "#{body[0..999]}..."  : body
   end
 end
