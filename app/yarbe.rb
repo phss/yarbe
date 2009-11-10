@@ -4,6 +4,7 @@ require "rubygems"
 require "vendor/sinatra/lib/sinatra.rb"
 require "haml"
 require "model"
+require "helpers"
 
 configure do
   set :views, File.dirname(__FILE__) + '/../views'
@@ -16,11 +17,7 @@ configure do
   Post.new(:title => "Post Two", :body => "This is post two").save
 end
 
-helpers do
-  def format_date(date)
-    date.strftime("%d %b %Y %H:%M") # TODO: how to unit test this?
-  end
-end
+helpers FormattingHelpers
 
 get '/' do
   @posts = Post.all(:order => [ :created_at.desc ])
