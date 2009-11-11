@@ -11,6 +11,15 @@ describe "Model" do
     
     post.should_not be_valid
     post.errors.should have_key(:title)
+    post.errors[:title].should == ["Title is required"]
+  end
+  
+  it "should fail validation if Post have no body" do
+    post = Post.new(:title => "Some title")
+    
+    post.should_not be_valid
+    post.errors.should have_key(:body)
+    post.errors[:body].should == ["Content is required"]
   end
   
   it "should save properly constructed Post" do

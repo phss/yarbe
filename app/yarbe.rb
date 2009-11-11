@@ -28,6 +28,10 @@ get '/new_post' do
   haml :new_post
 end
 
+post '/publish' do
+  "<div id='message'>Title is required</div>"
+end
+
 get '/yarbe.css' do
    content_type 'text/css', :charset => 'utf-8'
    sass :yarbe
