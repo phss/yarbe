@@ -9,7 +9,7 @@ require "helpers"
 configure do
   set :views, File.dirname(__FILE__) + "/../views"
   
-  DataMapper::setup(:default, "sqlite3::memory:")
+  DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
   DataMapper.auto_upgrade!
 end
 
