@@ -6,13 +6,15 @@ Feature: Publishing posts
   Scenario: Cannot publish post with no title
     Given there is no published posts
     When I create a post with no title
-    Then I have an error message "Title must not be blank"
+    Then I have an error message "Title is required"
+     And it repopulates the form
      And no post was created
   
   Scenario: Cannot publish post with no content
     Given there is no published posts  
     When I create a post with no content
     Then I have an error message "Content is required"
+     And it repopulates the form
      And no post was created    
 
   Scenario: Publishing a post

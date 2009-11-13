@@ -6,4 +6,6 @@
   %body
     #header
       %h1 Yet Another Ruby Blog Engine
+      - @messages and @messages.each do |message|
+        .message= message
     #content= yield

@@ -9,7 +9,7 @@ end
 
 Given /^there is a post with a large content$/ do
 	Given "there is no published posts"  
-  Post.new(:title => "Large post", :body => ("0123456789"*200)).save
+  Post.new(:title => "Large post", :content => ("0123456789"*200)).save
 end
 
 When /^I go to the main page$/ do
@@ -25,7 +25,7 @@ Then /^I see a blog list in the following order$/ do |table|
   table.hashes.each_with_index do |entry, i|
     last_response.should have_xpath("//div", :id => "post#{i}") do |node|
       node.should have_xpath("//div", :class => "title", :content => entry[:title])
-      node.should have_xpath("//div", :class => "blurb",  :content => entry[:body])
+      node.should have_xpath("//div", :class => "blurb",  :content => entry[:content])
       node.should have_xpath("//div", :class => "published_date",  :content => entry[:published_date])
     end
   end

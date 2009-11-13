@@ -1,8 +1,8 @@
 %form{:action => "/publish", :method => "POST"}
   .field-group
     .field Title
-    %input{:name => "title", :size => 100}
+    %input{:name => "title", :size => 100, :value => @post.title}
   .field-group
     .field Content
-    %textarea{:name => "body", :cols => 100, :rows => 40}
+    %textarea{:name => "content", :cols => 100, :rows => 40}= @post.content
   %input{:type => "submit", :id => "submit"}
