@@ -87,9 +87,12 @@ eos
     end
 
     it "should show whole post as summary in case there is no headings" do
-	    pending
+      pending
     end
 
+    it "should show a 'Read More' link when displaying a summary" do
+      pending
+    end
   end
 
 end
