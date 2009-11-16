@@ -1,6 +1,7 @@
-# require "dm-core"
-# require "dm-validations"
-require "datamapper"
+require "dm-core"
+require "dm-validations"
+require "dm-timestamps"
+require "rdiscount"
 
 class Post
   include DataMapper::Resource
@@ -16,5 +17,14 @@ class Post
   
   def blurb
     content.size > 1000 ? "#{content[0..999]}..."  : content
+  end
+
+  def formatted_content
+    RDiscount.new(content).to_html
+  end
+
+  def summary
+    content = formatted_content
+    content[0..content.index("<h") - 1]
   end
 end

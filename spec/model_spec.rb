@@ -55,4 +55,44 @@ describe "Model" do
     end
   end
 
+  describe "(formatting)" do
+    it "should allow markdown formatting in the content"  do
+      markdown_content = <<eos
+This is a heading
+-----------------
+
+This is a [link][l]
+
+[l]: http://link
+eos
+      post = Post.new(:content => markdown_content)
+
+      post.formatted_content.should == "<h2>This is a heading</h2>\n\n<p>This is a <a href=\"http://link\">link</a></p>\n"
+    end
+
+    it "should display the content until the first heading as summary" do
+       markdown_content = <<eos
+The summary goes from __here__ until...
+
+...the start of a heading.
+
+This is the end of the summary
+-----------------
+
+This should not appear
+eos
+     
+      post = Post.new(:content => markdown_content)
+      post.summary.should == "<p>The summary goes from <strong>here</strong> until...</p>\n\n<p>...the start of a heading.</p>\n\n"
+    end
+
+    it "should show whole post as summary in case there is no headings" do
+      pending
+    end
+
+    it "should show a 'Read More' link when displaying a summary" do
+      pending
+    end
+  end
+
 end
