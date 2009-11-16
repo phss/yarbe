@@ -15,16 +15,13 @@ class Post
   property :content, Text, :nullable => false, :message => "Content is required"
   property :created_at, DateTime
   
-  def blurb
-    content.size > 1000 ? "#{content[0..999]}..."  : content
-  end
-
   def formatted_content
     RDiscount.new(content).to_html
   end
 
   def summary
     content = formatted_content
-    content[0..content.index("<h") - 1]
+    heading_index = content.index("<h2>")
+    heading_index ? content[0..heading_index - 1] : content
   end
 end

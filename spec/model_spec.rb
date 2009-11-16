@@ -40,20 +40,6 @@ describe "Model" do
     post.content.should == "This is the content of the post. Yay!"
     post.created_at.should_not be_nil # FIXME: better date check
   end
-  
-  describe "(blurb)" do
-    it "should have blurb as the first 1000 characters of the content" do
-      post = Post.new(:content => "0123456789" * 200)
-
-      post.blurb.should == ("0123456789") * 100 + "..."
-    end
-
-    it "should have blurb as the content if it's less than 1000 characters" do
-      post = Post.new(:content => "Small content")
-
-      post.blurb.should == "Small content"
-    end
-  end
 
   describe "(formatting)" do
     it "should allow markdown formatting in the content"  do
@@ -81,13 +67,15 @@ This is the end of the summary
 
 This should not appear
 eos
-     
       post = Post.new(:content => markdown_content)
+      
       post.summary.should == "<p>The summary goes from <strong>here</strong> until...</p>\n\n<p>...the start of a heading.</p>\n\n"
     end
 
     it "should show whole post as summary in case there is no headings" do
-      pending
+      post = Post.new(:content => "This is a post without headings. The summary should be the whole body")
+      
+      post.summary.should == "<p>This is a post without headings. The summary should be the whole body</p>\n"
     end
 
     it "should show a 'Read More' link when displaying a summary" do
