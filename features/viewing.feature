@@ -23,6 +23,19 @@ Feature: Viewing posts
       | Yet another post | 30 Jul 2007 15:00   | This is yet another content |                      |
       | With summary     | 5 Sep 1997 13:00    | Summary before heading      | After heading        |
 
-  
+  Scenario: View a blog post
+    Given I have a post with title "The post title" and content
+      """
+        This is a summary.
+        
+        Real stuff here
+        ---------------
+        
+        I should be able to read this when I view the blog post.
+      """
+    When I go to the main page
+     And I click in the "the_post_title"
+    Then I can read the post content
+      
   
   

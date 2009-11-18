@@ -7,8 +7,16 @@ Given /^the following blog posts$/ do |table|
   table.hashes.each { |entry| Post.new(entry).save }
 end
 
+Given /^I have a post with title "([^\"]*)" and content$/ do |title, content|
+  pending
+end
+
 When /^I go to the main page$/ do
   visit "/"
+end
+
+When /^I click in the "([^\"]*)"$/ do |title|
+  pending
 end
 
 Then /^I see an empty blog listing$/ do
@@ -26,4 +34,7 @@ Then /^I see a blog list in the following order$/ do |table|
     end
   end
 end
-				
+
+Then /^I can read the post content$/ do
+  pending
+end
