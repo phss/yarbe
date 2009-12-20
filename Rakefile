@@ -1,6 +1,7 @@
 require "rubygems"
 require "rake"
-require 'cucumber'
+require "cucumber"
+require "metric_fu"
 
 require 'spec/rake/spectask'
 Spec::Rake::SpecTask.new(:spec) do |spec|

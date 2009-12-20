@@ -468,3 +468,11 @@ D, [2009-11-17T23:58:06.454012 #1046] DEBUG -- : REQUESTING PAGE: GET /new_post 
 D, [2009-11-17T23:58:06.460827 #1046] DEBUG -- : REQUESTING PAGE: POST /publish with {"title"=>"Hey there", "content"=>"This is my first post!!!"} and HTTP headers {"HTTP_REFERER"=>"/new_post"}
 D, [2009-11-17T23:58:06.474157 #1046] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
 D, [2009-11-17T23:58:06.505454 #1046] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
+D, [2009-12-20T11:05:19.937692 #443] DEBUG -- : REQUESTING PAGE: GET /new_post with {} and HTTP headers {}
+D, [2009-12-20T11:05:19.987838 #443] DEBUG -- : REQUESTING PAGE: POST /publish with {"title"=>"", "content"=>"Some content"} and HTTP headers {"HTTP_REFERER"=>"/new_post"}
+D, [2009-12-20T11:05:19.999210 #443] DEBUG -- : REQUESTING PAGE: GET /new_post with {} and HTTP headers {}
+D, [2009-12-20T11:05:20.006332 #443] DEBUG -- : REQUESTING PAGE: POST /publish with {"title"=>"Some title", "content"=>""} and HTTP headers {"HTTP_REFERER"=>"/new_post"}
+D, [2009-12-20T11:05:20.018520 #443] DEBUG -- : REQUESTING PAGE: GET /new_post with {} and HTTP headers {}
+D, [2009-12-20T11:05:20.025091 #443] DEBUG -- : REQUESTING PAGE: POST /publish with {"title"=>"Hey there", "content"=>"This is my first post!!!"} and HTTP headers {"HTTP_REFERER"=>"/new_post"}
+D, [2009-12-20T11:05:20.038723 #443] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
+D, [2009-12-20T11:05:20.061782 #443] DEBUG -- : REQUESTING PAGE: GET / with {} and HTTP headers {}
