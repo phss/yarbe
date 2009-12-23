@@ -74,19 +74,15 @@ eos
     it "should display the content until the first heading as summary" do
       post = Post.new(:content => SUMMARY_CONTENT_EXAMPLE)
       
-      post.summary.should == "<p>The summary goes from <strong>here</strong> until...</p>\n\n<p>...the start of a heading.</p>\n\n<a href=\"post/invalid_post\">Read more...</a>"
+      post.summary.should == "<p>The summary goes from <strong>here</strong> until...</p>\n\n<p>...the start of a heading.</p>\n\n"
+      post.more?.should be_true
     end
 
     it "should show whole post as summary in case there is no headings" do
       post = Post.new(:content => "This is a post without headings. The summary should be the whole body")
       
       post.summary.should == "<p>This is a post without headings. The summary should be the whole body</p>\n"
-    end
-
-    it "should show a 'Read More' link when displaying a summary" do
-      post = Post.new(:title => "Read more link here", :content => SUMMARY_CONTENT_EXAMPLE)
-      
-      post.summary.include?("<a href=\"post/read_more_link_here\">Read more...</a>").should be_true
+      post.more?.should be_false
     end
   end
   

@@ -36,6 +36,11 @@ post "/publish" do
   haml :new_post
 end
 
+get "/post/:link" do
+  @post = Post.first(:link => params[:link])
+  haml :view
+end
+
 get "/yarbe.css" do
    content_type "text/css", :charset => "utf-8"
    sass :yarbe

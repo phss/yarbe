@@ -1,5 +1,7 @@
 - @posts.each_with_index do |post, index|
   .post{:id => "post#{index}"}
-    .title= post.title
+    %a{:class => "title", :href => "/post/#{post.link}"}= post.title
     .published_date= format_date(post.created_at)
     .summary= post.summary
+    - if post.more?
+      %a{:href => "/post/#{post.link}"} Read more...

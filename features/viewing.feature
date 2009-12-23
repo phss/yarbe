@@ -34,8 +34,11 @@ Feature: Viewing posts
         I should be able to read this when I view the blog post.
       """
     When I go to the main page
-     And I click in the "the_post_title"
+     And I click in the "The post title"
     Then I can read the post content
+  
+  
+  
       
   
   

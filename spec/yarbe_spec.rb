@@ -40,4 +40,13 @@ describe 'YARBE App' do
       last_response.body.should include("Successfully published post")
       Post.all(:title => "I have a title", :content => "And also a content!").size.should == 1
   end
+  
+  it "should fetch post by link" do
+    Post.new(:title => "Some test title", :content => "Testing 1, 2, 3...").save
+    
+    get "/post/some_test_title"
+    
+    last_response.should be_ok
+    last_response.body.should include("Testing 1, 2, 3...")
+  end
 end
