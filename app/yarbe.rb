@@ -10,6 +10,7 @@ require "helpers"
 
 configure do
   set :views, File.dirname(__FILE__) + "/../views"
+  not_found { haml :not_found }
   
   Blog = OpenStruct.new(
     :title => "Yet Another Ruby Blog Engine",
@@ -19,9 +20,8 @@ configure do
     :admin_credentials => ["admin", "Demo123"]
   )
   
-  # DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
-  DataMapper::setup(:default, "sqlite3:blah.db")
-  DataMapper.auto_upgrade!
+  DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
+  DataMapper.auto_upgrade!  
 end
 
 helpers FormattingHelpers, AuthenticationHelpers do
