@@ -98,5 +98,14 @@ eos
       Post.new.link.should == "invalid_post"
     end
   end
+  
+  describe "(fetching)" do
+    it "should fetch posts in descending creation order" do
+      titles = ["first", "middle", "last"]
+      titles.each_with_index { |title, i| Post.new(:title => title, :content => title, :created_at => Time.now - i).save }
+      
+      Post.all_for_display.each_with_index { |post, i| post.title.should == titles[i] }
+    end
+  end
 
 end

@@ -28,7 +28,7 @@ helpers FormattingHelpers, AuthenticationHelpers
 # Public stuff
 
 get "/" do
-  @posts = Post.all(:order => [ :created_at.desc ])
+  @posts = Post.all_for_display
   haml :list
 end
 
@@ -45,7 +45,7 @@ end
 # Feed stuff
 
 get "/feed" do
-  @posts = Post.all(:order => [ :created_at.desc ])
+  @posts = Post.all_for_display
   builder :feed
 end
 

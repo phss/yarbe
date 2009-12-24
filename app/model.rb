@@ -30,4 +30,8 @@ class Post
     formatted_content.include?("<h2")
   end
   
+  def self.all_for_display
+    Post.all(:order => [ :created_at.desc ])
+  end
+  
 end
