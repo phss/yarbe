@@ -22,12 +22,12 @@ class Post
 
   def summary
     summary_content = formatted_content
-    summary_content = summary_content[0..summary_content.index("<h2>") - 1] if more?
+    summary_content = summary_content[0..summary_content.index("<h2") - 1] if more?
     return summary_content
   end
   
   def more?
-    formatted_content.include?("<h2>")
+    formatted_content.include?("<h2")
   end
   
 end
