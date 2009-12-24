@@ -9,32 +9,23 @@ require "helpers"
 configure do
   set :views, File.dirname(__FILE__) + "/../views"
   
-  # DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
-  DataMapper::setup(:default, "sqlite3:/blah.db")  
+  Config = OpenStruct.new(
+    :title => "Yet Another Ruby Blog Engine",
+    :subtitle => "This is just a template blog. Change at will!",
+    :admin_credentials => ["admin", "Demo123"]
+  )
+  
+  DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
   DataMapper.auto_upgrade!
 end
 
-helpers FormattingHelpers
+helpers FormattingHelpers, AuthenticationHelpers
+
+# Public stuff
 
 get "/" do
   @posts = Post.all(:order => [ :created_at.desc ])
   haml :list
-end
-
-get "/new_post" do
-  @post = Post.new
-  haml :new_post
-end
-
-post "/publish" do
-  @post = Post.new(params)
-  if @post.save
-    @messages = ["Successfully published post"]
-    @post = Post.new
-  else
-    @messages = @post.errors
-  end
-  haml :new_post
 end
 
 get "/post/:link" do
@@ -43,6 +34,26 @@ get "/post/:link" do
 end
 
 get "/yarbe.css" do
-   content_type "text/css", :charset => "utf-8"
-   sass :yarbe
+  content_type "text/css", :charset => "utf-8"
+  sass :yarbe
+end
+
+# Admin stuff
+
+get "/new_post" do
+  protected!
+  @post = Post.new
+  haml :new_post
+end
+
+post "/publish" do
+  protected!
+  @post = Post.new(params)
+  if @post.save
+    @messages = ["Successfully published post"]
+    @post = Post.new
+  else
+    @messages = @post.errors
+  end
+  haml :new_post
 end

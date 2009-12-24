@@ -5,8 +5,8 @@
     %link{:rel => 'stylesheet', :type =>'text/css', :href => '/yarbe.css' }
   %body
     #header
-      %h1 Yet Another Ruby Blog Engine
-      %h2 This is just a template blog. Change at will!
+      %h1= Config.title
+      %h2= Config.subtitle
       - @messages and @messages.each do |message|
         .message= message
     #content= yield
