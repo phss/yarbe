@@ -24,17 +24,15 @@ configure do
   DataMapper.auto_upgrade!
 end
 
-helpers FormattingHelpers, AuthenticationHelpers
-
-helpers do
-  def save_or_update(a_post)
-    if a_post.save
+helpers FormattingHelpers, AuthenticationHelpers do
+  def save_or_update(post)
+    if post.save
       @messages = ["Successfully saved/updated post"]
-      a_post = Post.new
+      post = Post.new
     else
-      @messages = a_post.errors
+      @messages = post.errors
     end
-    haml :new_post, :locals => {:post => a_post, :action_url => params[:action_url]}
+    haml :new_post, :locals => {:post => post, :action_url => params[:action_url]}
   end
 end
 
@@ -87,8 +85,14 @@ end
 
 post "/admin/update" do
   protected!
-  a_post = Post.first(:id => params[:postid])
-  a_post.title = params[:title]
-  a_post.content = params[:content]
-  save_or_update(a_post)
+  post = Post.first(:id => params[:postid])
+  post.title = params[:title]
+  post.content = params[:content]
+  save_or_update(post)
+end
+
+get "/admin/delete/:id" do # TODO: Should be a post
+  protected!
+  Post.first(:id => params[:id]).destroy
+  redirect "/admin"
 end
