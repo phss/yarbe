@@ -16,21 +16,21 @@ describe 'YARBE App' do
 
   describe "(validations)" do
     it "should fail to publish when title is missing" do
-      post "/publish", {:content => "I think the title is missing"}, credentials(Config.admin_credentials)
+      post "/admin/publish", {:content => "I think the title is missing"}, credentials(Blog.admin_credentials)
 
       last_response.should be_ok
       last_response.body.should include("Title is required")
     end
 
     it "should fail to publish when content is missing" do
-      post "/publish", {:title => "I think the body is missing"}, credentials(Config.admin_credentials)
+      post "/admin/publish", {:title => "I think the body is missing"}, credentials(Blog.admin_credentials)
 
       last_response.should be_ok
       last_response.body.should include("Content is required")
     end
 
     it "should fail and display both validation messages when post is empty" do
-      post "/publish", {}, credentials(Config.admin_credentials)
+      post "/admin/publish", {}, credentials(Blog.admin_credentials)
 
       last_response.should be_ok
       last_response.body.should include("Title is required")    
@@ -38,20 +38,20 @@ describe 'YARBE App' do
     end
     
     it "should fail when no credentials are provided" do
-      post "/publish", {:title => "I have a title", :content => "And also a content!"}
+      post "/admin/publish", {:title => "I have a title", :content => "And also a content!"}
       
       last_response.status.should == 401
     end
     
     it "should fail when wrong credentials provided" do
-      post "/publish", {:title => "I have a title", :content => "And also a content!"}, credentials(["blah", "blah"])
+      post "/admin/publish", {:title => "I have a title", :content => "And also a content!"}, credentials(["blah", "blah"])
 
       last_response.status.should == 401
     end
   end
   
   it "should successfully submit a post" do
-      post "/publish", {:title => "I have a title", :content => "And also a content!"}, credentials(Config.admin_credentials)
+      post "/admin/publish", {:title => "I have a title", :content => "And also a content!"}, credentials(Blog.admin_credentials)
       
       last_response.should be_ok
       last_response.body.should include("Successfully published post")

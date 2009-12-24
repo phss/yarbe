@@ -11,7 +11,7 @@ When /^I create a post with title "([^\"]*)" and content "([^\"]*)"$/ do |title,
   @content = content
   
   basic_auth("admin", "Demo123") # This admin credentials are the same defined in yarbe.rb configuration section 
-  visit "/new_post"
+  visit "/admin/new_post"
   fill_in "title", :with => title
   fill_in "content", :with => content  
   click_button "submit"

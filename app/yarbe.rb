@@ -9,7 +9,7 @@ require "helpers"
 configure do
   set :views, File.dirname(__FILE__) + "/../views"
   
-  Config = OpenStruct.new(
+  Blog = OpenStruct.new(
     :title => "Yet Another Ruby Blog Engine",
     :subtitle => "This is just a template blog. Change at will!",
     :admin_credentials => ["admin", "Demo123"]
@@ -40,13 +40,13 @@ end
 
 # Admin stuff
 
-get "/new_post" do
+get "/admin/new_post" do
   protected!
   @post = Post.new
   haml :new_post
 end
 
-post "/publish" do
+post "/admin/publish" do
   protected!
   @post = Post.new(params)
   if @post.save

@@ -5,8 +5,8 @@
     %link{:rel => 'stylesheet', :type =>'text/css', :href => '/yarbe.css' }
   %body
     #header
-      %h1= Config.title
-      %h2= Config.subtitle
+      %h1= Blog.title
+      %h2= Blog.subtitle
       - @messages and @messages.each do |message|
         .message= message
     #content= yield
