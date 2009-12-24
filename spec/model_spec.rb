@@ -95,7 +95,7 @@ eos
     end
     
     it "should have a 'invalid_post' link when title is missing" do
-      Post.new.link.should == "invalid_post"
+      Post.new.link.should == nil
     end
   end
   

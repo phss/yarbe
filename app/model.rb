@@ -12,9 +12,14 @@ class Post
                               :presence  => "Title is required",
                               :is_unique => "Title must be unique"
                            }
-  property :link, String, :default => lambda { |r, p| r.title ? r.title.downcase.split.join("_") : "invalid_post" }
+  property :link, String
   property :content, Text, :nullable => false, :message => "Content is required"
   property :created_at, DateTime
+  
+  def title=(new_title)
+    attribute_set(:title, new_title)
+    attribute_set(:link, new_title.downcase.split.join("_")) if new_title
+  end
   
   def formatted_content
     RDiscount.new(content).to_html
