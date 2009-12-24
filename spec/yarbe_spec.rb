@@ -54,7 +54,7 @@ describe 'YARBE App' do
       post "/admin/publish", {:title => "I have a title", :content => "And also a content!"}, credentials(Blog.admin_credentials)
       
       last_response.should be_ok
-      last_response.body.should include("Successfully published post")
+      last_response.body.should include("Successfully saved/updated post")
       Post.all(:title => "I have a title", :content => "And also a content!").size.should == 1
   end
   

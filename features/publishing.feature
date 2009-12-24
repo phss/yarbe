@@ -20,7 +20,7 @@ Feature: Publishing posts
   Scenario: Publishing a post
     Given there is no published posts  
     When I create a post with title "Hey there" and content "This is my first post!!!"
-    Then I have an info message "Successfully published post"
+    Then I have an info message "Successfully saved/updated post"
      And post with title "Hey there" and content "This is my first post!!!" was created
 
   

@@ -1,9 +1,10 @@
 %a{:href => "/admin"} << Back
-%form{:action => "/admin/publish", :method => "POST"}
+%form{:action => "/admin/#{action_url}", :method => "POST"}
+  %input{:name => "postid", :value => post.id, :type => "hidden"}
   .field-group
     .field Title
-    %input{:name => "title", :size => 100, :value => @post.title}
+    %input{:name => "title", :size => 100, :value => post.title}
   .field-group
     .field Content
-    %textarea{:name => "content", :cols => 100, :rows => 40}= @post.content
+    %textarea{:name => "content", :cols => 100, :rows => 40}= post.content
   %input{:type => "submit", :id => "submit"}

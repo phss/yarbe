@@ -26,6 +26,18 @@ end
 
 helpers FormattingHelpers, AuthenticationHelpers
 
+helpers do
+  def save_or_update(a_post)
+    if a_post.save
+      @messages = ["Successfully saved/updated post"]
+      a_post = Post.new
+    else
+      @messages = a_post.errors
+    end
+    haml :new_post, :locals => {:post => a_post, :action_url => params[:action_url]}
+  end
+end
+
 # Public stuff
 
 get "/" do
@@ -52,7 +64,7 @@ end
 
 # Admin stuff
 
-get "/admin" do
+get "/admin/?" do
   protected!
   @posts = Post.all_for_display
   haml :admin
@@ -60,24 +72,23 @@ end
 
 get "/admin/new_post" do
   protected!
-  @post = Post.new
-  haml :new_post
+  haml :new_post, :locals => {:post => Post.new, :action_url => "publish"}
 end
 
 post "/admin/publish" do
   protected!
-  @post = Post.new(params)
-  if @post.save
-    @messages = ["Successfully published post"]
-    @post = Post.new
-  else
-    @messages = @post.errors
-  end
-  haml :new_post
+  save_or_update(Post.new(:title => params[:title], :content => params[:content]))
 end
 
 get "/admin/edit/:id" do
   protected!
-  @post = Post.first(:id => params[:id])
-  haml :new_post
+  haml :new_post, :locals => {:post => Post.first(:id => params[:id]), :action_url => "update"}
+end
+
+post "/admin/update" do
+  protected!
+  a_post = Post.first(:id => params[:postid])
+  a_post.title = params[:title]
+  a_post.content = params[:content]
+  save_or_update(a_post)
 end
