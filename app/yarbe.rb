@@ -19,7 +19,8 @@ configure do
     :admin_credentials => ["admin", "Demo123"]
   )
   
-  DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
+  # DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
+  DataMapper::setup(:default, "sqlite3:blah.db")
   DataMapper.auto_upgrade!
 end
 
@@ -53,6 +54,7 @@ end
 
 get "/admin" do
   protected!
+  @posts = Post.all_for_display
   haml :admin
 end
 
@@ -71,5 +73,11 @@ post "/admin/publish" do
   else
     @messages = @post.errors
   end
+  haml :new_post
+end
+
+get "/admin/edit/:id" do
+  protected!
+  @post = Post.first(:id => params[:id])
   haml :new_post
 end

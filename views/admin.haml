@@ -1,4 +1,16 @@
 %h2 Administration
-%ul
-  %li
-    %a{:href => "/admin/new_post"} Create a new blog post
+
+%a{:href => "/admin/new_post"} Create a new blog post
+
+%h3 Posts
+%table
+  %tr
+    %th Title
+    %th Actions
+  - @posts.each do |post|
+    %tr
+      %td= post.title
+      %td
+        %a{:href => "/post/#{post.link}"} [View]
+        %a{:href => "/admin/edit/#{post.id}"} [Edit]
+        [Delete]
