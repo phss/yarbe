@@ -80,12 +80,12 @@ end
 
 get "/admin/edit/:id" do
   protected!
-  haml :new_post, :locals => {:post => Post.first(:id => params[:id]), :action_url => "update"}
+  haml :new_post, :locals => {:post => Post.get(params[:id]), :action_url => "update"}
 end
 
 post "/admin/update" do
   protected!
-  post = Post.first(:id => params[:postid])
+  post = Post.get(params[:postid])
   post.title = params[:title]
   post.content = params[:content]
   save_or_update(post)
@@ -93,6 +93,7 @@ end
 
 get "/admin/delete/:id" do # TODO: Should be a post
   protected!
-  Post.first(:id => params[:id]).destroy
+  post = Post.get(params[:id])
+  post.destroy if post
   redirect "/admin"
 end
