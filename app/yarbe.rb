@@ -19,8 +19,7 @@ configure do
     :admin_credentials => ["admin", "Demo123"]
   )
   
-  # DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
-  DataMapper::setup(:default, "sqlite3:blah.db")
+  DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
   DataMapper.auto_upgrade!
 end
 

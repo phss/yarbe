@@ -1,8 +1,9 @@
 %html
   %head
-    %title Yarbe
+    %title= Blog.title
     %meta{"http-equiv" => "Content-Type", :content=>"text/html; charset=UTF-8"}
-    %link{:rel => 'stylesheet', :type =>'text/css', :href => '/yarbe.css' }
+    %link{:rel => "alternate", :type =>"application/atom+xml", :href => "/feed", :title => "Feed for #{Blog.title}" }
+    %link{:rel => "stylesheet", :type =>"text/css", :href => "/yarbe.css" }
   %body
     #header
       %h1= Blog.title
