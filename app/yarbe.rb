@@ -3,6 +3,8 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "app"))
 require "rubygems"
 require "sinatra"
 require "haml"
+require "sass"
+require "builder"
 require "model"
 require "helpers"
 
@@ -12,10 +14,13 @@ configure do
   Blog = OpenStruct.new(
     :title => "Yet Another Ruby Blog Engine",
     :subtitle => "This is just a template blog. Change at will!",
+    :author => "Some dude",
+    :url => "http://localhost:4567",
     :admin_credentials => ["admin", "Demo123"]
   )
   
-  DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
+  # DataMapper::setup(:default, ENV["DATABASE_URL"] || "sqlite3::memory:")
+  DataMapper::setup(:default, "sqlite3:blah.db")
   DataMapper.auto_upgrade!
 end
 
@@ -36,6 +41,13 @@ end
 get "/yarbe.css" do
   content_type "text/css", :charset => "utf-8"
   sass :yarbe
+end
+
+# Feed stuff
+
+get "/feed" do
+  @posts = Post.all(:order => [ :created_at.desc ])
+  builder :feed
 end
 
 # Admin stuff
