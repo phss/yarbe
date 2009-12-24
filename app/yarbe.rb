@@ -40,6 +40,11 @@ end
 
 # Admin stuff
 
+get "/admin" do
+  protected!
+  haml :admin
+end
+
 get "/admin/new_post" do
   protected!
   @post = Post.new
