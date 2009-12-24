@@ -4,8 +4,8 @@ module FormattingHelpers
     date.strftime("%d %b %Y %H:%M")
   end
   
-  def rfc_date(datetime)
-    datetime.strftime("%Y-%m-%dT%H:%M:%SZ") # 2003-12-13T18:30:02Z
+  def rfc_date(date)
+    date.strftime("%Y-%m-%dT%H:%M:%SZ") # 2003-12-13T18:30:02Z
   end
 
 end
