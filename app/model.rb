@@ -18,7 +18,7 @@ class Post
   
   def title=(new_title)
     attribute_set(:title, new_title)
-    attribute_set(:link, new_title.downcase.split.join("_")) if new_title
+    attribute_set(:link, link_for(new_title)) if new_title
   end
   
   def formatted_content
@@ -37,6 +37,12 @@ class Post
   
   def self.all_for_display
     Post.all(:order => [ :created_at.desc ])
+  end
+  
+  private
+  
+  def link_for(title)
+    title.downcase.gsub(/[^\w\s]/,"").split.join("_")
   end
   
 end

@@ -94,6 +94,12 @@ eos
       post.link.should == "this_is_a_example_32_of_a_link"
     end
     
+    it "should only allow letters and numbers on the link" do
+      post = Post.new(:title => "This #is!;. a valid link?%^")
+      
+      post.link.should == "this_is_a_valid_link"
+    end
+    
     it "should have a 'invalid_post' link when title is missing" do
       Post.new.link.should == nil
     end
